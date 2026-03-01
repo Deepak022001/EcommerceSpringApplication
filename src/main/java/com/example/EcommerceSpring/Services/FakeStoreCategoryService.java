@@ -1,6 +1,7 @@
 package com.example.EcommerceSpring.Services;
 
 import com.example.EcommerceSpring.Dtos.CategoryDTO;
+import com.example.EcommerceSpring.Dtos.ProductDTO;
 import com.example.EcommerceSpring.Gateway.ICategoryGateway;
 import org.springframework.stereotype.Service;
 
