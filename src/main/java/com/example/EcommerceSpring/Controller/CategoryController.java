@@ -18,8 +18,8 @@ public class CategoryController {
 //    private CategoryService categoryService
 //    depending on concrete class is violating Dependecy inversion
 
-    private  ICategoryService iCategoryService;
-    @GetMapping("/categories")
+    private final ICategoryService iCategoryService;
+    @GetMapping("/products")
     public ResponseEntity< List<CategoryDTO>> getAllCategories() throws IOException {
         List<CategoryDTO>response=this.iCategoryService.getAllCategories();
         return ResponseEntity.ok(response);

@@ -7,6 +7,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CategoryDTO {
-    private String name;
+
+public class CategoryDTO{
+    public int id;
+    public String title;
+    public double price;
+    public String description;
+    public String category;
+    public String image;
+    public RatingDTO rating;
 }
+

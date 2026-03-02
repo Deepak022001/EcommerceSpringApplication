@@ -14,14 +14,6 @@ public class ProductDTO{
     public String description;
     public String category;
     public String image;
-    public Rating rating;
-    @Data
-    @Builder
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public static class Rating{
-        public double rate;
-        public int count;
-    }
+    public RatingDTO rating;
 }
 

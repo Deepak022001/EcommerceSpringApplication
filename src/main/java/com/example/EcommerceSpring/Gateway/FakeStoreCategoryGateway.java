@@ -2,38 +2,46 @@ package com.example.EcommerceSpring.Gateway;
 
 import com.example.EcommerceSpring.Dtos.CategoryDTO;
 import com.example.EcommerceSpring.Dtos.FakeStoreCategoryResponseDTO;
+import com.example.EcommerceSpring.Dtos.FakeStoreProductResponseDTO;
+import com.example.EcommerceSpring.Dtos.RatingDTO;
 import com.example.EcommerceSpring.Gateway.api.FakeStoreCategoryApi;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class FakeStoreCategoryGateway implements ICategoryGateway{
-
     private final FakeStoreCategoryApi fakeStoreCategoryApi;
-
-    public FakeStoreCategoryGateway(FakeStoreCategoryApi fakeStoreCategoryApi1){
-        this.fakeStoreCategoryApi=fakeStoreCategoryApi1;
-    }
     @Override
     public List<CategoryDTO> getAllCategories() throws IOException {
-
-        List<String> categories =
+        List<FakeStoreCategoryResponseDTO> response =
                 this.fakeStoreCategoryApi
                         .getAllFakeCategories()
                         .execute()
                         .body();
-
-        if (categories == null) {
+        if (response == null) {
             throw new IOException("failed to fetch");
         }
-
-        return categories.stream()
-                .map(category ->
+        return response.stream()
+                .map(product ->
                         CategoryDTO.builder()
-                                .name(String.valueOf(category))
-                                .build())
+                                .id(product.getId())
+                                .title(product.getTitle())
+                                .price(product.getPrice())
+                                .description(product.getDescription())
+                                .category(product.getCategory())
+                                .image(product.getImage())
+                                .rating(
+                                        RatingDTO.builder()
+                                                .rate(product.getRating().getRate())
+                                                .count(product.getRating().getCount())
+                                                .build()
+                                )
+                                .build()
+                )
                 .toList();
     }
 }

@@ -7,6 +7,6 @@ import retrofit2.http.GET;
 import java.util.List;
 
 public interface FakeStoreCategoryApi {
-    @GET("products/categories")
-    Call<List<String>> getAllFakeCategories();
+    @GET("products")
+    Call<List<FakeStoreCategoryResponseDTO>> getAllFakeCategories();
 }

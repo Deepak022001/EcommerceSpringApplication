@@ -12,21 +12,11 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class FakeStoreCategoryResponseDTO {
-    private String status;
-
-    private String message;
-
-    private List<String>categories;
+    public int id;
+    public String title;
+    public double price;
+    public String description;
+    public String category;
+    public String image;
+    public RatingDTO rating;
 }
-//
-//
-//public class Root{
-//    public int id;
-//    public String title;
-//    public double price;
-//    public String description;
-//    public String category;
-//    public String image;
-//    public Rating rating;
-//}
-//
