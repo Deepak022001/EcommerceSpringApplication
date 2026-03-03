@@ -24,5 +24,4 @@ public class CategoryController {
         List<CategoryDTO>response=this.iCategoryService.getAllCategories();
         return ResponseEntity.ok(response);
     }
-
 }
