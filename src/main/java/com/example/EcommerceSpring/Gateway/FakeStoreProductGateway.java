@@ -4,6 +4,7 @@ import com.example.EcommerceSpring.Dtos.FakeStoreProductResponseDTO;
 import com.example.EcommerceSpring.Dtos.ProductDTO;
 import com.example.EcommerceSpring.Dtos.RatingDTO;
 import com.example.EcommerceSpring.Gateway.api.FakeStoreProductApi;
+import com.example.EcommerceSpring.mapppers.GetAllProductsMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,19 +29,7 @@ public class FakeStoreProductGateway implements IProductGateway {
             throw new IOException("Failed to fetch product");
         }
 
-        return ProductDTO.builder()
-                .id(responseDTO.getId())
-                .title(responseDTO.getTitle())
-                .price(responseDTO.getPrice())
-                .description(responseDTO.getDescription())
-                .category(responseDTO.getCategory())
-                .image(responseDTO.getImage())
-                .rating(
-                        RatingDTO.builder()
-                                .rate(responseDTO.getRating().getRate())
-                                .count(responseDTO.getRating().getCount())
-                                .build()
-                )
-                .build();
+//
+        return GetAllProductsMapper.productDTO(responseDTO);
     }
 }

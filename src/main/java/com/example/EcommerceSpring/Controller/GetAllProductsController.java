@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1")
-public class CategoryController {
+public class GetAllProductsController {
 //    private CategoryService categoryService
 //    depending on concrete class is violating Dependecy inversion
 

@@ -5,6 +5,7 @@ import com.example.EcommerceSpring.Dtos.FakeStoreCategoryResponseDTO;
 import com.example.EcommerceSpring.Dtos.FakeStoreProductResponseDTO;
 import com.example.EcommerceSpring.Dtos.RatingDTO;
 import com.example.EcommerceSpring.Gateway.api.FakeStoreCategoryApi;
+import com.example.EcommerceSpring.mapppers.GetAllCategoriesMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -27,23 +28,6 @@ public class FakeStoreCategoryGateway implements ICategoryGateway{
         if (response == null) {
             throw new IOException("failed to fetch");
         }
-        return response.stream()
-                .map(product ->
-                        CategoryDTO.builder()
-                                .id(product.getId())
-                                .title(product.getTitle())
-                                .price(product.getPrice())
-                                .description(product.getDescription())
-                                .category(product.getCategory())
-                                .image(product.getImage())
-                                .rating(
-                                        RatingDTO.builder()
-                                                .rate(product.getRating().getRate())
-                                                .count(product.getRating().getCount())
-                                                .build()
-                                )
-                                .build()
-                )
-                .toList();
+        return GetAllCategoriesMapper.categoryDTOS(response);
     }
 }

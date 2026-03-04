@@ -1,7 +1,6 @@
 package com.example.EcommerceSpring.Controller;
 
 import com.example.EcommerceSpring.Dtos.ProductDTO;
-import com.example.EcommerceSpring.Services.ICategoryService;
 import com.example.EcommerceSpring.Services.IProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +14,7 @@ import java.io.IOException;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
-public class productController {
+public class GetProductByIdController {
     private final IProductService iProductService;
     @GetMapping("/products/{id}")
     public ResponseEntity<ProductDTO> getProductById(@PathVariable Long id) throws IOException {

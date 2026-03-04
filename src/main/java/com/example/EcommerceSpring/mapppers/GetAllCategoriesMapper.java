@@ -8,9 +8,6 @@ import com.example.EcommerceSpring.Dtos.RatingDTO;
 import java.util.List;
 
 public class GetAllCategoriesMapper {
-    public static FakeStoreCategoryResponseDTO fakeStoreCategoryResponseDTO(){
-        return null;
-    }
     public static List<CategoryDTO> categoryDTOS(List<FakeStoreCategoryResponseDTO> dtos){
         return dtos.stream().map(dto->CategoryDTO.builder().
                 id(dto.getId())
