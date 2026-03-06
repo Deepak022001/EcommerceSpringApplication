@@ -1,5 +1,6 @@
 package com.example.EcommerceSpring.Dtos;
 
+import com.example.EcommerceSpring.Entity.Rating;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
