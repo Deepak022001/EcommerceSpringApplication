@@ -1,12 +1,15 @@
-package com.example.EcommerceSpring.Dtos;
+package com.example.EcommerceSpring.Dtos.Request;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CategoryDTO {
+public class CreateCategoryRequestDto {
+
     private String name;
 }
