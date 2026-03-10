@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public interface IProductRepository extends JpaRepository<Product,Long> {
+public interface ProductRepository extends JpaRepository<Product,Long> {
 
     @Query(nativeQuery = true, value = "SELECT DISTINCT category FROM products")
     List<Product>findByCategory_Name(String name);
@@ -19,6 +19,6 @@ public interface IProductRepository extends JpaRepository<Product,Long> {
     List<String> findAllCategories();
 
 
-
+    boolean existsByCategory_Id(Long id);
 }
 

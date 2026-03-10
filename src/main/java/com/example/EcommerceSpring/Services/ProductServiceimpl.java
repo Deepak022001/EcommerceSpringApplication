@@ -2,7 +2,7 @@ package com.example.EcommerceSpring.Services;
 
 import com.example.EcommerceSpring.Dtos.Request.CreateProductRequestDto;
 import com.example.EcommerceSpring.Dtos.Response.GetProductResponseDto;
-import com.example.EcommerceSpring.Repository.IProductRepository;
+import com.example.EcommerceSpring.Repository.ProductRepository;
 import com.example.EcommerceSpring.Schema.Category;
 import com.example.EcommerceSpring.Schema.Product;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class ProductServiceimpl implements ProductService {
-    private final IProductRepository iProductRepository;
+    private final ProductRepository iProductRepository;
     private final CategoryService iCategoryService;
 
     @Override
