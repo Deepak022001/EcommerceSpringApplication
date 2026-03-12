@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 
 import java.util.List;
 
@@ -14,6 +16,8 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Entity
+@SQLDelete(sql = "UPDATE category SET deleted_at = CURRENT_TIMESTAMP WHERE id = ?")
+@SQLRestriction("deleted_at IS NULL")
 public class Category extends BaseEntity{
     private String name;
 }
