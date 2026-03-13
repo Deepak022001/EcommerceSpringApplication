@@ -1,15 +1,13 @@
-package com.example.EcommerceSpring.Services;
+package com.example.EcommerceSpring.Controller;
 
-import java.util.List;
-
+import com.example.EcommerceSpring.Dtos.Request.CreateOrderRequestDto;
 import com.example.EcommerceSpring.Dtos.Request.updateOrderRequestDtos;
 import com.example.EcommerceSpring.Dtos.Response.GetOrderResponseDto;
-import com.example.EcommerceSpring.Schema.Order;
 import com.example.EcommerceSpring.Services.OrderService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-
-import lombok.RequiredArgsConstructor;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/orders")
@@ -18,14 +16,13 @@ public class OrderController {
     private final OrderService orderService;
 
     @GetMapping
-    public List<Order> getAllOrders() {
+    public List<GetOrderResponseDto> getAllOrders() {
         return orderService.getAllOrders();
-//        throw new UnsupportedOperationException("Not implemented");
     }
 
     @PostMapping
-    public Order createOrder(@RequestBody GetOrderResponseDto responseDto) {
-        return orderService.createOrder(responseDto);
+    public GetOrderResponseDto createOrder(@RequestBody CreateOrderRequestDto createOrderRequestDto) {
+        return orderService.createOrder(createOrderRequestDto);
     }
 
     @DeleteMapping("/{id}")
@@ -34,24 +31,24 @@ public class OrderController {
     }
 
     @GetMapping("/{id}")
-    public Order getOrderById(@PathVariable Long id) {
+    public GetOrderResponseDto getOrderById(@PathVariable Long id) {
         return orderService.getOrderById(id);
     }
 
     @GetMapping("/user/{userId}")
-    public List<Order> getOrdersByUserId(@PathVariable Long userId) {
+    public List<GetOrderResponseDto> getOrdersByUserId(@PathVariable Long userId) {
         return orderService.getByUserId(userId);
     }
 
     @PutMapping("/{id}")
-    public Order updateOrder(@PathVariable Long id,@RequestBody updateOrderRequestDtos requestDtos) {
-        return orderService.updateOrder(id,requestDtos);
+    public GetOrderResponseDto updateOrder(
+        @PathVariable Long id, @RequestBody updateOrderRequestDtos requestDtos) {
+        return orderService.updateOrder(id,
+            requestDtos);
     }
-
 
     @GetMapping("/{id}/summary")
     public GetOrderResponseDto getOrderSummary(@PathVariable Long id) {
         return orderService.getOrderSummary(id);
     }
-
 }

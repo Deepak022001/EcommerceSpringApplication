@@ -1,15 +1,18 @@
 package com.example.EcommerceSpring.Dtos.Request;
 
-import com.example.EcommerceSpring.Schema.OrderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
+@Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class updateOrderRequestDtos {
-    private OrderStatus status;
+public class CreateOrderRequestDto {
+    private Long userId;
+    private List<CreateOrderItemRequestDto> items;
+    private String shippingAddress;
 }

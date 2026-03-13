@@ -1,5 +1,3 @@
 package com.example.EcommerceSpring.Dtos.Response;
 
-public class GetCategoryResponseDto {
-    
-}
+public class GetCategoryResponseDto {}

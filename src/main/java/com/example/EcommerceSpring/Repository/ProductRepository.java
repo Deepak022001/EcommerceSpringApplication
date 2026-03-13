@@ -1,16 +1,15 @@
 package com.example.EcommerceSpring.Repository;
+
 import com.example.EcommerceSpring.Schema.Product;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
-public interface ProductRepository extends JpaRepository<Product,Long> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
 
-    @Query(nativeQuery = true, value = "SELECT DISTINCT category FROM products")
-    List<Product>findByCategory_Name(String name);
+    List<Product> findByCategory_Name(String name);
 
     @Query("SELECT p FROM Product p WHERE p.id=:id")
     Product getProductWithDetailsById(Long id);
@@ -18,7 +17,5 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
     @Query("SELECT DISTINCT p.category.name FROM Product p")
     List<String> findAllCategories();
 
-
     boolean existsByCategory_Id(Long id);
 }
-
