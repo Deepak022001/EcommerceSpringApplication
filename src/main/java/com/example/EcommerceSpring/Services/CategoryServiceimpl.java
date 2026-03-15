@@ -4,11 +4,12 @@ import com.example.EcommerceSpring.Dtos.Request.CreateCategoryRequestDto;
 import com.example.EcommerceSpring.Repository.CategoryRepository;
 import com.example.EcommerceSpring.Repository.ProductRepository;
 import com.example.EcommerceSpring.Schema.Category;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
@@ -18,7 +19,9 @@ public class CategoryServiceimpl implements CategoryService {
 
     @Override
     public Category createCategory(CreateCategoryRequestDto createCategoryRequestDto) {
-        Category category = Category.builder().name(createCategoryRequestDto.getName()).build();
+        Category category = Category.builder()
+            .name(createCategoryRequestDto.getName())
+            .build();
         return iCategoryRepository.save(category);
     }
 
@@ -29,7 +32,8 @@ public class CategoryServiceimpl implements CategoryService {
 
     @Override
     public Category getCategoryById(Long id) {
-        Category category = iCategoryRepository.findById(id).orElse(null);
+        Category category = iCategoryRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("category not found"));
         return category;
     }
 
@@ -39,9 +43,9 @@ public class CategoryServiceimpl implements CategoryService {
             throw new RuntimeException("Cannot delete category because products exist");
         }
         Category category =
-                iCategoryRepository
-                        .findById(id)
-                        .orElseThrow(() -> new RuntimeException("Category not found"));
+            iCategoryRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("Category not found"));
 
         category.setDeletedAt(LocalDateTime.now());
 
