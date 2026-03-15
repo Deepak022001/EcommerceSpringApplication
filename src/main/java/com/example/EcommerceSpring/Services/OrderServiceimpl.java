@@ -4,8 +4,12 @@ import com.example.EcommerceSpring.Dtos.Request.CreateOrderRequestDto;
 import com.example.EcommerceSpring.Dtos.Request.updateOrderRequestDtos;
 import com.example.EcommerceSpring.Dtos.Response.GetOrderResponseDto;
 import com.example.EcommerceSpring.Repository.OrderRepository;
+import com.example.EcommerceSpring.Repository.OrderproductsRepository;
+import com.example.EcommerceSpring.Repository.ProductRepository;
 import com.example.EcommerceSpring.Schema.Order;
+import com.example.EcommerceSpring.Schema.OrderProducts;
 import com.example.EcommerceSpring.Schema.OrderStatus;
+import com.example.EcommerceSpring.Schema.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -18,6 +22,8 @@ import java.util.List;
 public class OrderServiceimpl implements OrderService {
 
     private final OrderRepository orderRepository;
+    private final ProductRepository productRepository;
+    private final OrderproductsRepository orderproductsRepository;
 
     @Override
     public List<GetOrderResponseDto> getAllOrders() {
@@ -48,26 +54,34 @@ public class OrderServiceimpl implements OrderService {
             .build();
     }
 
+    @Override
+    public void deleteById(Long id) {
+        orderproductsRepository.deleteById(id);
+    }
+
 
     @Override
     public GetOrderResponseDto createOrder(CreateOrderRequestDto createOrderRequestDto) {
-        Order newOrder = Order.builder()
+        Order order = Order.builder()
             .status(OrderStatus.PENDING)
             .build();
-        orderRepository.save(newOrder);
+        for (var listOfitems : createOrderRequestDto.getItems()) {
+            Product product = productRepository.findById(listOfitems.getProductId())
+                .orElseThrow();
+            OrderProducts orderProducts = OrderProducts.builder()
+                .order(order)
+                .product(product)
+                .quantity(listOfitems.getQuantity() != null ? listOfitems.getQuantity() : 1)
+                .build();
+            orderproductsRepository.save(orderProducts);
+        }
         return GetOrderResponseDto.builder()
-            .id(newOrder.getId())
-            .status(newOrder.getStatus())
+            .id(order.getId())
+            .status(order.getStatus())
             .items(List.of())
-            .createdAt(newOrder.getCreatedAt())
-            .updatedAt(newOrder.getUpdatedAt())
+            .createdAt(order.getCreatedAt())
+            .updatedAt(order.getUpdatedAt())
             .build();
-
-    }
-
-    @Override
-    public void deleteById(Long id) {
-        orderRepository.deleteById(id);
     }
 
     @Override
