@@ -1,7 +1,7 @@
 package com.example.EcommerceSpring.Controller;
 
 import com.example.EcommerceSpring.Dtos.Request.CreateOrderRequestDto;
-import com.example.EcommerceSpring.Dtos.Request.updateOrderRequestDtos;
+import com.example.EcommerceSpring.Dtos.Request.UpdateOrderRequestDtos;
 import com.example.EcommerceSpring.Dtos.Response.GetOrderResponseDto;
 import com.example.EcommerceSpring.Services.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -42,7 +42,7 @@ public class OrderController {
 
     @PutMapping("/{id}")
     public GetOrderResponseDto updateOrder(
-        @PathVariable Long id, @RequestBody updateOrderRequestDtos requestDtos) {
+        @PathVariable Long id, @RequestBody UpdateOrderRequestDtos requestDtos) {
         return orderService.updateOrder(id,
             requestDtos);
     }
